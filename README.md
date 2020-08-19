@@ -70,7 +70,9 @@ import bing from 'bing-translate-result';
 bing.audio({ text: 'Hello world!' }).then(result => console.log(result));
 
 /*
-    => data:audio/mp3;base64,//NIxAAAAANIAAAAAExB...
+    => "data:audio/mp3;base64,//NIxAAAAANIAAAAAExB..."
+
+    "audio" function returns dataURL.
 */
 ```
 Audio params:
@@ -78,14 +80,14 @@ Audio params:
 {
     /*
     * the meaning is the same as translate's params
-    * Notice: it must auto detect if you don't set 'from'
+    * Notice: it must auto detect if you don't set "from"
     */
     text: string,
     from?: string,
     com?: boolean
 }
 ```
-You can play audio like it in the chrome extension background:
+You can play audio like it:
 ```javascript
 import bing from 'bing-translate-result';
 
@@ -102,7 +104,7 @@ Detect:
 ```javascript
 import bing from 'bing-translate-result';
 
-bing.detect('你好').then(result => console.log(result));
+bing.detect({ text: '你好' }).then(result => console.log(result));
 
 /*
     => 'zh-Hans'
@@ -127,9 +129,9 @@ bing.translate({text: 'hello', to: 'abc'})
 The error code is as follows:
 ```javascript
 'CONNECTION_TIMED_OUT'     // Connection timed out.
-'BAD_REQUEST'              // Request status it not 200.
-'RESULT_ERROR'             // Server return an unexpected result.
-'LANGUAGE_NOT_SOPPORTED'   // The translate source doesn't support this language.
+'BAD_REQUEST'              // Response status not 200.
+'RESULT_ERROR'             // Server returns an unexpected result.
+'LANGUAGE_NOT_SOPPORTED'   // The translate source doesn't support this language code.
 ```
 ## License
 MIT
