@@ -3,6 +3,7 @@ import { langCode } from './lang-code';
 import { LANGUAGE_NOT_SOPPORTED, RESULT_ERROR } from './error-codes';
 import { detect } from './detect';
 import { TranslateParameter } from './types';
+import { getTokenAndKey } from './getTokenAndKey';
 
 export const translate = async ({ text, from = '', to = '', userLang = '', com = true, autoDetect = true }: TranslateParameter) => {
     userLang = userLang || 'en';
@@ -14,10 +15,14 @@ export const translate = async ({ text, from = '', to = '', userLang = '', com =
 
     const url = `https://${com ? 'www' : 'cn'}.bing.com/ttranslatev3`;
 
+    const { token, key } = await getTokenAndKey(com);
+
     let searchParams = new URLSearchParams();
     searchParams.append('fromLang', from);
     searchParams.append('text', text);
     searchParams.append('to', to);
+    searchParams.append('token', token);
+    searchParams.append('key', key.toString());
 
     const res = await fetchData(url, {
         method: 'POST',
