@@ -47,7 +47,8 @@ export type TranslateResult = {
     text: string,
     from: string,
     to: string,
-    result: [string]
+    result: string[],
+    dict?: string[]
 };
 
 export type DetectResult = string;

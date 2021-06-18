@@ -13,6 +13,7 @@ bing.translate({ text: 'hello', to: 'ja', userLang: 'ja' }).then(result => conso
 
 /*
     => {
+        dict: ["NOUN: こんにちは, こんにち, ハロー, もしもし"],
         from: "en",
         result: ["こんにちは"],
         text: "hello",
