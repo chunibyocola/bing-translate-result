@@ -3,10 +3,10 @@ import { RESULT_ERROR } from './error-codes';
 import { DetectParameter, DetectResult } from './types';
 import { getTokenAndKey } from './getTokenAndKey';
 
- export const detect = async ({ text, com = true }: DetectParameter): Promise<DetectResult> => {
-    const url = `https://${com ? 'www' : 'cn'}.bing.com/ttranslatev3`;
+export const detect = async ({ text, com = true }: DetectParameter): Promise<DetectResult> => {
+    const { token, key, IG, IID } = await getTokenAndKey(com);
 
-    const { token, key } = await getTokenAndKey(com);
+    const url = `https://${com ? 'www' : 'cn'}.bing.com/ttranslatev3?isVertical=1&IG=${IG}&IID=${IID}`;
 
     let searchParams = new URLSearchParams();
     searchParams.append('fromLang', 'auto-detect');

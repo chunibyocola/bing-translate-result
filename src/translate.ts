@@ -13,9 +13,9 @@ export const translate = async ({ text, from = '', to = '', userLang = '', com =
 
     if (!(from in langCode) || !(to in langCode)) { throw getError(LANGUAGE_NOT_SOPPORTED); }
 
-    const url = `https://${com ? 'www' : 'cn'}.bing.com/ttranslatev3`;
+    const { token, key, IG, IID } = await getTokenAndKey(com);
 
-    const { token, key } = await getTokenAndKey(com);
+    const url = `https://${com ? 'www' : 'cn'}.bing.com/ttranslatev3?isVertical=1&IG=${IG}&IID=${IID}`;
 
     let searchParams = new URLSearchParams();
     searchParams.append('fromLang', from);
